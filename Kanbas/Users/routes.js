@@ -1,7 +1,6 @@
 import * as dao from "./dao.js";
 import * as courseDao from "../Courses/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
-import { model } from "mongoose";
 
 export default function UserRoutes(app) {
   const createCourse = async (req, res) => {
@@ -121,20 +120,6 @@ export default function UserRoutes(app) {
     }
     const status = await enrollmentsDao.unenrollUserFromCourse(uid, cid);
     res.send(status);
-  };
-
-  const findCoursesForEnrolledUser = async (req, res) => {
-    let { userId } = req.params;
-    if (userId === "current") {
-      const currentUser = req.session["currentUser"];
-      if (!currentUser) {
-        res.sendStatus(401);
-        return;
-      }
-      userId = currentUser._id;
-    }
-    const courses = await courseDao.findCoursesForEnrolledUser(userId);
-    res.json(courses);
   };
   app.get("/api/users/:uid/courses", findCoursesForUser);
   app.post("/api/users/:uid/courses/:cid", enrollUserInCourse);
