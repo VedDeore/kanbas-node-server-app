@@ -11,12 +11,6 @@ export default function UserRoutes(app) {
   };
   app.post("/api/users/current/courses", createCourse);
 
-<<<<<<< HEAD
-  const createUser = (req, res) => {};
-  const deleteUser = (req, res) => {};
-  const findAllUsers = (req, res) => {};
-  const findUserById = (req, res) => {};
-=======
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
     res.json(user);
@@ -47,7 +41,6 @@ export default function UserRoutes(app) {
     const user = await dao.findUserById(req.params.userId);
     res.json(user);
   };
->>>>>>> a6
 
   const updateUser = async (req, res) => {
     const userId = req.params.userId;
@@ -59,14 +52,8 @@ export default function UserRoutes(app) {
     }
     res.json(currentUser);
   };
-<<<<<<< HEAD
-
-  const signup = (req, res) => {
-    const user = dao.findUserByUsername(req.body.username);
-=======
   const signup = async (req, res) => {
     const user = await dao.findUserByUsername(req.body.username);
->>>>>>> a6
     if (user) {
       res.status(400).json({ message: "Username already in use" });
       return;
@@ -84,10 +71,6 @@ export default function UserRoutes(app) {
     } else {
       res.status(401).json({ message: "User not found!" });
     }
-<<<<<<< HEAD
-    // res.json(currentUser);
-=======
->>>>>>> a6
   };
   const signout = (req, res) => {
     req.session.destroy();
