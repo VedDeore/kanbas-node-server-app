@@ -11,15 +11,12 @@ const schema = new mongoose.Schema(
     type: {
       type: String,
       enum: ["MULTIPLE", "TRUEFALSE", "FILLIN"],
+      required: true,
     },
     title: { type: String, required: true },
     points: { type: Number, required: true },
     description: String,
     choices: [choiceSchema],
-    correct: {
-      type: mongoose.Schema.Types.Mixed,
-      required: true,
-    },
     quizId: { type: mongoose.Schema.Types.ObjectId, ref: "QuizModel" },
   },
   { collection: "questions" }

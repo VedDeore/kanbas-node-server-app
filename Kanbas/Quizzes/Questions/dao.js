@@ -9,6 +9,6 @@ export function createQuestion(question) {
 export function deleteQuestion(questionId) {
   return model.deleteOne({ _id: questionId });
 }
-export function updateQuiz(questionId, questionUpdates) {
+export function updateQuestion(questionId, questionUpdates) {
   return model.updateOne({ _id: questionId }, questionUpdates);
 }
