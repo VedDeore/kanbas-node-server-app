@@ -1,6 +1,7 @@
 import * as dao from "./dao.js";
 import * as courseDao from "../Courses/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
+import * as quizAnswersDao from "../Quizzes/Grades/dao.js";
 
 export default function UserRoutes(app) {
   const createCourse = async (req, res) => {
@@ -121,6 +122,22 @@ export default function UserRoutes(app) {
     const status = await enrollmentsDao.unenrollUserFromCourse(uid, cid);
     res.send(status);
   };
+
+  const createQuizGrade = async (req, res) => {
+    const currentUser = req.session["currentUser"];
+    // if (!currentUser) {
+    //   res.sendStatus(401);
+    //   return;
+    // }
+    const quizGrade = await quizAnswersDao.createQuizGrades(req.body);
+    res.json(quizGrade);
+  };
+  const findQuizGrade = async (req, res) => {
+    const { userId, qid } = req.params;
+    const quizGrade = await quizAnswersDao.findGradesForUser(userId, qid);
+    res.json(quizGrade);
+  };
+
   app.get("/api/users/:uid/courses", findCoursesForUser);
   app.post("/api/users/:uid/courses/:cid", enrollUserInCourse);
   app.delete("/api/users/:uid/courses/:cid", unenrollUserFromCourse);
@@ -133,4 +150,6 @@ export default function UserRoutes(app) {
   app.post("/api/users/signin", signin);
   app.post("/api/users/signout", signout);
   app.post("/api/users/profile", profile);
+  app.post("/api/users/:userId/quizzes/:qid", createQuizGrade);
+  app.get("/api/users/:userId/quizzes/:qid", findQuizGrade);
 }
