@@ -13,6 +13,7 @@ const schema = new mongoose.Schema(
     quiz: { type: mongoose.Schema.Types.ObjectId, ref: "QuizModel" },
     grade: Number,
     attempts: Number,
+    time: Number,
     questions: [questionSchema],
   },
   { collection: "quizgrades" }
