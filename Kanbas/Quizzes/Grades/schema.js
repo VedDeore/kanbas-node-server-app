@@ -14,6 +14,7 @@ const schema = new mongoose.Schema(
     grade: Number,
     attempts: Number,
     time: Number,
+    dateOfAttempt: Date,
     questions: [questionSchema],
   },
   { collection: "quizgrades" }
