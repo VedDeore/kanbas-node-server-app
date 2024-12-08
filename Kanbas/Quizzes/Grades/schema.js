@@ -6,7 +6,6 @@ const questionSchema = new mongoose.Schema(
   },
   { _id: false }
 );
-
 const schema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "UserModel" },
