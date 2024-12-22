@@ -125,10 +125,6 @@ export default function UserRoutes(app) {
 
   const createQuizGrade = async (req, res) => {
     const currentUser = req.session["currentUser"];
-    // if (!currentUser) {
-    //   res.sendStatus(401);
-    //   return;
-    // }
     const quizGrade = await quizAnswersDao.createQuizGrades(req.body);
     res.json(quizGrade);
   };
